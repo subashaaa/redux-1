@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-// import { incrementNumber } from './Actions';
 import rootReducer from './Reducers';
 
 const store = createStore(rootReducer);

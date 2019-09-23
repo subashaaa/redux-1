@@ -1,14 +1,15 @@
-import { INC_NUMBER } from '../Actions';
+import { INC_NUMBER, DEC_NUMBER } from '../Actions';
 
-export default function performAction(state, action) {
+export default function performAction(state = { num: 0 }, action) {
     switch (action.type) {
         case INC_NUMBER:
-            console.log('Action performed from the reducer');
-            console.log(state, action);
-            let num = 0;
+            var num;
+            num = state.num + 1;
+            return { num };
+        case DEC_NUMBER:
+            num = state.num - 1;
             return { num };
         default:
-            num = 0;
-            return num;
+            return state;
     }
 }

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { incrementNumber, decrementNumber } from '../Actions';
+
 class Number extends Component {
     render() {
         return (
@@ -8,15 +13,15 @@ class Number extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm">
-                            <Button bsStyle="primary"> Increment </Button>
+                            <Button bsStyle="primary" onClick={ () => this.props.incrementNumber(this.props.num) }> Increment </Button>
                         </div>
 
                         <div className="col-sm">
-                            0
+                            {this.props.num}
                         </div>
 
                         <div className="col-sm">
-                            <Button bsStyle="primary"> Decrement </Button>
+                            <Button bsStyle="primary" onClick={ () => this.props.decrementNumber(this.props.num) }> Decrement </Button>
                         </div>
                     </div>
                 </div>
@@ -25,4 +30,14 @@ class Number extends Component {
     }
 }
 
-export default Number;
+function mapStateToProps(state) {
+    return {
+        num: state.num
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({incrementNumber, decrementNumber}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Number);
